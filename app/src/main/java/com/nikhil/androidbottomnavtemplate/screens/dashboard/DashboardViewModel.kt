@@ -1,10 +1,10 @@
-package com.nikhil.androidbottomnavtemplate.ui.dashboard
+package com.nikhil.androidbottomnavtemplate.screens.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel() : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
