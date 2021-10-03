@@ -14,19 +14,42 @@
         android:layout_height="match_parent"
         tools:context=".screens.home.HomeFragment">
 
-        <TextView
-            android:id="@+id/text_home"
+        <Button
+            android:id="@+id/btn_find"
+            android:text="@string/find"
+            android:textAllCaps="false"
+            android:layout_marginHorizontal="@dimen/standard_padding"
+            android:layout_marginTop="@dimen/standard_padding"
+            android:layout_width="@dimen/button_small_width"
+            android:layout_height="@dimen/button_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/et_keyword"
+            android:paddingHorizontal="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/standard_padding"
+            android:layout_marginVertical="@dimen/standard_padding"
+            android:layout_marginStart="@dimen/standard_padding"
+            android:hint="@string/search_keyword_hint"
+            android:maxLines="1"
+            android:background="@drawable/edit_text_bg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/edit_text_height"
+            app:layout_constraintTop_toTopOf="@id/btn_find"
+            app:layout_constraintBottom_toBottomOf="@id/btn_find"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_find"
+            android:inputType="textNoSuggestions" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/uni_rv_adapter"
+            android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btn_find"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikhil.androidbottomnavtemplate.base.BaseViewModel
+import com.nikhil.androidbottomnavtemplate.common.models.UniItem
 import com.nikhil.androidbottomnavtemplate.data.DataRepositoryContract
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import timber.log.Timber
@@ -18,13 +20,15 @@ class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseVi
     }
     val text: LiveData<String> = _text
 
-    fun getUniList() {
+    private val _uniList = MutableLiveData<List<UniItem>>()
+    val uniList: LiveData<List<UniItem>> = _uniList
+
+    fun getUniList(keyword: String) {
         viewModelScope.launchIdling {
             try {
                 with(dataRepository) {
-                    Timber.d("getting Result.............")
-                    val result = getUniList("technology")
-                    Timber.d("Result:: $result")
+                    val result = getUniList(keyword)
+                    _uniList.value = result
                 }
             } catch (e: Exception) {
                Timber.d("RESULT_ERR:: ${e.message}")

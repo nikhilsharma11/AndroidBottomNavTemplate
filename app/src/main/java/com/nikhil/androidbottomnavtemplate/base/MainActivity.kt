@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.nikhil.androidbottomnavtemplate.R
 import com.nikhil.androidbottomnavtemplate.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainViewModel>() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

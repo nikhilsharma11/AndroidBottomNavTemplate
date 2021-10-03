@@ -10,6 +10,6 @@ interface ApiService {
 
     @GET(ProjectEndpoints.getUniList)
     suspend fun getUniList(
-        @Query(PATH_NAME) name: String
+        @Query(PATH_NAME) keyword: String
     ): List<UniItem>
 }
