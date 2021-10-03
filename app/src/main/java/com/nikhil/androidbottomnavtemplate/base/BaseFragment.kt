@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<E: BaseEvent, VM : BaseViewModel<E>> : Fragment() {
+
     fun hideKeyboard() {
         (activity as? BaseActivity<*, *>)?.hideKeyboard(requireView())
     }

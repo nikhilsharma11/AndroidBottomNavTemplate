@@ -4,4 +4,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="search_keyword_hint">Enter keyword to search...</string>
     <string name="find">Find</string>
+    <string name="enter_keyword_error">Please enter a keyword</string>
 </resources>
