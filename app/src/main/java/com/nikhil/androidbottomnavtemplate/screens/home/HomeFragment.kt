@@ -27,10 +27,9 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
         _binding.viewModel = viewModel
 
         adapter = UniItemsAdapter()
-        _binding.uniRvAdapter.adapter = adapter
+        _binding.uniRv.adapter = adapter
 
         addObservers()
-        viewModel.getUniList("technology")
 
         return binding.root
     }
@@ -39,11 +38,17 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
         viewModel.uniList.observe(viewLifecycleOwner, {
             adapter.setUniList(it)
             hideKeyboard()
+            _binding.uniRv.requestFocus()
         })
 
         viewModel.events.observe(viewLifecycleOwner, {
             when(it) {
-                is HomeEvent.FindClicked -> Timber.d("NIKHIL:: Hello world!")
+                is HomeEvent.FindClicked -> {
+                    if(_binding.etKeyword.text.toString().isNotBlank())
+                        viewModel.getUniList(_binding.etKeyword.text.toString())
+                    else
+                        view?.snack("Please enter a keyword")
+                }
             }
         })
     }

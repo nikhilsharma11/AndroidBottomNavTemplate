@@ -44,7 +44,9 @@
             android:inputType="textNoSuggestions" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/uni_rv_adapter"
+            android:id="@+id/uni_rv"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
