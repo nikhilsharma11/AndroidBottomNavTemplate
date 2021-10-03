@@ -1,0 +1,3 @@
+package com.nikhil.androidbottomnavtemplate.base
+
+interface BaseEvent
