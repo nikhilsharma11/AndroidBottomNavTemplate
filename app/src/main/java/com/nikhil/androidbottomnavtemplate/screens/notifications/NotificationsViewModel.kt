@@ -2,9 +2,11 @@ package com.nikhil.androidbottomnavtemplate.screens.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.nikhil.androidbottomnavtemplate.base.BaseViewModel
+import org.koin.core.component.KoinApiExtension
 
-class NotificationsViewModel() : ViewModel() {
+@KoinApiExtension
+class NotificationsViewModel() : BaseViewModel<NotificationsEvent>() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

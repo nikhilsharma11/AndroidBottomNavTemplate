@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nikhil.androidbottomnavtemplate.BR
 import com.nikhil.androidbottomnavtemplate.common.models.UniItem
 import com.nikhil.androidbottomnavtemplate.databinding.ItemUniversityBinding
+import okhttp3.internal.notifyAll
 
 class UniItemsAdapter : RecyclerView.Adapter<UniItemsAdapter.BindableViewHolder>() {
 

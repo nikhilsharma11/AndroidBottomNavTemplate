@@ -1,17 +1,17 @@
 package com.nikhil.androidbottomnavtemplate.screens.home
 
 import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.nikhil.androidbottomnavtemplate.base.BaseViewModel
 import com.nikhil.androidbottomnavtemplate.common.models.UniItem
 import com.nikhil.androidbottomnavtemplate.data.DataRepositoryContract
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import timber.log.Timber
-import java.lang.Exception
+import org.koin.core.component.KoinApiExtension
 
-class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel<HomeEvent>(), KoinComponent {
+@KoinApiExtension
+class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel<HomeEvent>() {
 
     private val INITIAL_MESSAGE = "Find universities by entering a keyword"
     private val NO_RESULTS = "No results found.."

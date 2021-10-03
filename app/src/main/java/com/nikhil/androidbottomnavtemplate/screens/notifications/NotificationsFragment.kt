@@ -5,40 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.nikhil.androidbottomnavtemplate.base.BaseFragment
 import com.nikhil.androidbottomnavtemplate.databinding.FragmentNotificationsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : BaseFragment<NotificationsEvent, NotificationsViewModel>() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private val notificationsViewModel: NotificationsViewModel by viewModel()
+    private lateinit var _binding: FragmentNotificationsBinding
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
+    ): View {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding.root
     }
 }

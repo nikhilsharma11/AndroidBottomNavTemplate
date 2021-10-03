@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.nikhil.androidbottomnavtemplate.R
 import com.nikhil.androidbottomnavtemplate.base.BaseFragment
 import com.nikhil.androidbottomnavtemplate.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
 class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
 
     private val viewModel: HomeViewModel by viewModel()
@@ -22,8 +25,8 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        _binding.lifecycleOwner = viewLifecycleOwner
-        _binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         init()
 
         return binding.root
@@ -31,7 +34,7 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
 
     private fun init() {
         adapter = UniItemsAdapter()
-        _binding.uniRv.adapter = adapter
+        binding.uniRv.adapter = adapter
 
         addObservers()
     }
@@ -40,16 +43,18 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
         viewModel.uniList.observe(viewLifecycleOwner, {
             adapter.setUniList(it)
             hideKeyboard()
-            _binding.uniRv.requestFocus()
+            binding.uniRv.requestFocus()
         })
 
         viewModel.events.observe(viewLifecycleOwner, {
             when(it) {
                 is HomeEvent.FindClicked -> {
-                    if(_binding.etKeyword.text.toString().isNotBlank())
-                        viewModel.getUniList(_binding.etKeyword.text.toString())
+                    if(binding.etKeyword.text.toString().isNotBlank()) {
+                        hideKeyboard()
+                        viewModel.getUniList(binding.etKeyword.text.toString())
+                    }
                     else
-                        view?.snack("Please enter a keyword")
+                        view?.snack(resources.getString(R.string.enter_keyword_error))
                 }
             }
         })
