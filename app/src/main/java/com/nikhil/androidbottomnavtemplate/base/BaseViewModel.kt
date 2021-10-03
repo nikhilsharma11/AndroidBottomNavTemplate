@@ -16,10 +16,21 @@ import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-abstract class BaseViewModel: ViewModel(), KoinComponent {
+abstract class BaseViewModel<T: BaseEvent>: ViewModel(), KoinComponent {
     private val dataRepository: DataRepositoryContract by inject()
     private val idlingResource: ProjectIdlingResource by inject()
 
+    private val _events = SingleLiveEvent<T>()
+    val events: LiveData<T>
+        get() = _events
+
+    protected fun postEvent(event: T?, sync: Boolean = false) {
+        if (sync) {
+            _events.value = event!!
+        } else {
+            _events.postValue(event!!)
+        }
+    }
 
     protected fun CoroutineScope.launchIdling(
         context: CoroutineContext = EmptyCoroutineContext,

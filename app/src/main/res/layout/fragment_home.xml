@@ -18,6 +18,7 @@
             android:id="@+id/btn_find"
             android:text="@string/find"
             android:textAllCaps="false"
+            android:onClick="@{() -> viewModel.findClicked()}"
             android:layout_marginHorizontal="@dimen/standard_padding"
             android:layout_marginTop="@dimen/standard_padding"
             android:layout_width="@dimen/button_small_width"

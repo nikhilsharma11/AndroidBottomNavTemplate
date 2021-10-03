@@ -5,7 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity<VM: BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<E: BaseEvent, VM: BaseViewModel<E>> : AppCompatActivity() {
 
     fun hideKeyboard(view: View) {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

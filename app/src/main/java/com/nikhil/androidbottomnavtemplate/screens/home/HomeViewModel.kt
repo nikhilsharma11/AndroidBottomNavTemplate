@@ -13,7 +13,7 @@ import org.koin.core.component.KoinComponent
 import timber.log.Timber
 import java.lang.Exception
 
-class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel(), KoinComponent {
+class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel<HomeEvent>(), KoinComponent {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
@@ -34,5 +34,9 @@ class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseVi
                Timber.d("RESULT_ERR:: ${e.message}")
             }
         }
+    }
+
+    fun findClicked() {
+        postEvent(HomeEvent.FindClicked)
     }
 }

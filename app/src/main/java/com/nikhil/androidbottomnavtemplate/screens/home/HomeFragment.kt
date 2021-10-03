@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import com.nikhil.androidbottomnavtemplate.base.BaseFragment
 import com.nikhil.androidbottomnavtemplate.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
 
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var _binding: FragmentHomeBinding
@@ -38,6 +39,12 @@ class HomeFragment : BaseFragment() {
         viewModel.uniList.observe(viewLifecycleOwner, {
             adapter.setUniList(it)
             hideKeyboard()
+        })
+
+        viewModel.events.observe(viewLifecycleOwner, {
+            when(it) {
+                is HomeEvent.FindClicked -> Timber.d("NIKHIL:: Hello world!")
+            }
         })
     }
 }

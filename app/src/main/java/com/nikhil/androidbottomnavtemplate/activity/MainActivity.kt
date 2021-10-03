@@ -1,16 +1,16 @@
-package com.nikhil.androidbottomnavtemplate.base
+package com.nikhil.androidbottomnavtemplate.activity
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nikhil.androidbottomnavtemplate.R
+import com.nikhil.androidbottomnavtemplate.base.BaseActivity
 import com.nikhil.androidbottomnavtemplate.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity<MainViewModel>() {
+class MainActivity : BaseActivity<MainEvent, MainViewModel>() {
 
     private lateinit var binding: ActivityMainBinding
 
