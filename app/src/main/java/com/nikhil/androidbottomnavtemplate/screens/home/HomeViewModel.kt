@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.nikhil.androidbottomnavtemplate.base.BaseViewModel
 import com.nikhil.androidbottomnavtemplate.common.models.UniItem
 import com.nikhil.androidbottomnavtemplate.data.DataRepositoryContract
+import kotlinx.coroutines.delay
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
@@ -15,6 +16,7 @@ class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseVi
 
     private val INITIAL_MESSAGE = "Find universities by entering a keyword"
     private val NO_RESULTS = "No results found.."
+    private val SEARCHING = "Looking for universities..."
 
     private val _text = MutableLiveData<String>().apply {
         value = INITIAL_MESSAGE
@@ -28,9 +30,15 @@ class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseVi
         if(it.isEmpty()) View.VISIBLE else View.GONE
     }
 
+    private val _progressVisibility = MutableLiveData<Boolean>().apply { false }
+    val progressVisibility: LiveData<Boolean> = _progressVisibility
+
     fun getUniList(keyword: String) {
         viewModelScope.launchIdling {
             try {
+                _progressVisibility.value = true
+                clearUniListForSearch()
+                delay(1000)
                 with(dataRepository) {
                     val result = getUniList(keyword)
                     _uniList.value = result
@@ -38,8 +46,15 @@ class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseVi
                 }
             } catch (e: Exception) {
                _text.value = NO_RESULTS
+            } finally {
+                _progressVisibility.value = false
             }
         }
+    }
+
+    private fun clearUniListForSearch() {
+        _uniList.value = emptyList()
+        _text.value = SEARCHING
     }
 
     fun findClicked() {
