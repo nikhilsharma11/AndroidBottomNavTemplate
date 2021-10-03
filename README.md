@@ -1,1 +1,1 @@
-# AndroidBottomNavTemplate
+# AndroidBottomNavTemplate - Starter app
