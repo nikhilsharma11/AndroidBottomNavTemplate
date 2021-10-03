@@ -9,11 +9,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinApiExtension
 abstract class BaseViewModel<T: BaseEvent>: ViewModel(), KoinComponent {
     private val dataRepository: DataRepositoryContract by inject()
     private val idlingResource: ProjectIdlingResource by inject()

@@ -8,9 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.nikhil.androidbottomnavtemplate.base.BaseViewModel
 import com.nikhil.androidbottomnavtemplate.common.models.UniItem
 import com.nikhil.androidbottomnavtemplate.data.DataRepositoryContract
-import org.koin.core.component.KoinComponent
+import org.koin.core.component.KoinApiExtension
 
-class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel<HomeEvent>(), KoinComponent {
+@KoinApiExtension
+class HomeViewModel(private val dataRepository: DataRepositoryContract) : BaseViewModel<HomeEvent>() {
 
     private val INITIAL_MESSAGE = "Find universities by entering a keyword"
     private val NO_RESULTS = "No results found.."

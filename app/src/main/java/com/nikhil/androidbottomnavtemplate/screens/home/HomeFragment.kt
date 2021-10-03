@@ -8,7 +8,9 @@ import com.nikhil.androidbottomnavtemplate.R
 import com.nikhil.androidbottomnavtemplate.base.BaseFragment
 import com.nikhil.androidbottomnavtemplate.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
 class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
 
     private val viewModel: HomeViewModel by viewModel()
@@ -47,8 +49,10 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
         viewModel.events.observe(viewLifecycleOwner, {
             when(it) {
                 is HomeEvent.FindClicked -> {
-                    if(binding.etKeyword.text.toString().isNotBlank())
+                    if(binding.etKeyword.text.toString().isNotBlank()) {
+                        hideKeyboard()
                         viewModel.getUniList(binding.etKeyword.text.toString())
+                    }
                     else
                         view?.snack(resources.getString(R.string.enter_keyword_error))
                 }

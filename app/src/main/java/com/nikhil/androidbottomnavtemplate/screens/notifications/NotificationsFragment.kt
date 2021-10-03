@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import com.nikhil.androidbottomnavtemplate.base.BaseFragment
 import com.nikhil.androidbottomnavtemplate.databinding.FragmentNotificationsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,17 +16,17 @@ class NotificationsFragment : BaseFragment<NotificationsEvent, NotificationsView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        notificationsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
 
