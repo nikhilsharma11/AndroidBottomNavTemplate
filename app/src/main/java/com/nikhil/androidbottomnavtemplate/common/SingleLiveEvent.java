@@ -16,8 +16,6 @@ package com.nikhil.androidbottomnavtemplate.common;
  *  limitations under the License.
  */
 
-import android.util.Log;
-
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
