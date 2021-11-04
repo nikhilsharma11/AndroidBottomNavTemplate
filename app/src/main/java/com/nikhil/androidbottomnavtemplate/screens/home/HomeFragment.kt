@@ -13,6 +13,7 @@ import org.koin.core.component.KoinApiExtension
 @KoinApiExtension
 class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
 
+    private val _TAG = "HOME_FRAGMENT"
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var _binding: FragmentHomeBinding
     private val binding get() = _binding
@@ -44,6 +45,10 @@ class HomeFragment : BaseFragment<HomeEvent, HomeViewModel>() {
             adapter.setUniList(it)
             hideKeyboard()
             binding.uniRv.requestFocus()
+        })
+
+        viewModel.progressVisibility.observe(viewLifecycleOwner, { showProgress ->
+            binding.progress.visibility = View.VISIBLE.takeIf { showProgress } ?: View.GONE
         })
 
         viewModel.events.observe(viewLifecycleOwner, {
